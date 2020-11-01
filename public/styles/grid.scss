@@ -1,0 +1,15 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+@mixin container() {
+  width: 100%;
+  max-width: calc(100% - 64px);
+  margin-left: auto;
+  margin-right: auto;
+  @include max-vw($lg) {
+    max-width: calc(100% - 34px);
+  }
+  @include max-vw($md) {
+    max-width: calc(100% - 32px);
+  }
+}
