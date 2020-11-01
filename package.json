@@ -34,7 +34,8 @@
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-yandex-maps": "4.4.0",
-    "sass": "1.28.0"
+    "sass": "1.28.0",
+    "ymaps": "0.2.1"
   },
   "devDependencies": {
     "@commitlint/cli": "11.0.0",

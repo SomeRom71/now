@@ -7,6 +7,7 @@ import Document, {
   Main,
   NextScript,
 } from 'next/document';
+import { YMAPS_API_KEY } from '../constants/api-constants';
 
 class MyDocument extends Document {
 
@@ -40,6 +41,10 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <script
+            src={`https://api-maps.yandex.ru/2.1/?apikey=${YMAPS_API_KEY}&lang=ru_RU`}
+            type="text/javascript"
+          />
         </body>
       </Html>
     );
