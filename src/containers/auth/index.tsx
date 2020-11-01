@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { YMaps, Map, YMapsApi } from 'react-yandex-maps';
+import cn from 'classnames';
 import { YMAPS_API_KEY } from '../../constants/api-constants';
 import s from './auth.module.scss';
 
 const AuthContainer: React.FC = () => {
   const [position, setPosition] = useState([0, 0]);
+  const [visible, setVisible] = useState(false);
   const [ymaps, setYmaps] = useState<YMapsApi>();
 
   // эта херня для того чтобы при авторизации на фоне у юзера был его город :)
@@ -22,6 +24,7 @@ const AuthContainer: React.FC = () => {
     const cityGeocode = await ymaps.geocode(...cityName);
     const cityCoordinates = await cityGeocode.geoObjects.get(0).geometry.getCoordinates();
     setPosition(cityCoordinates);
+    setVisible(true);
   };
 
   useEffect(() => {
@@ -36,7 +39,7 @@ const AuthContainer: React.FC = () => {
         <Map
           onLoad={(ymapsApi) => setYmaps(ymapsApi)}
           modules={['geocode', 'geolocation']}
-          className={s.map}
+          className={cn(s.map, { [s.visible]: visible })}
           state={{ center: position, zoom: 12 }}
         />
       </YMaps>
