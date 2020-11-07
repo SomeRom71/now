@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { YMaps, Map, YMapsApi } from 'react-yandex-maps';
 import cn from 'classnames';
+import firebase from 'firebase';
 import { YMAPS_API_KEY } from '../../constants/api-constants';
 import s from './auth.module.scss';
 
 const AuthContainer: React.FC = () => {
-  const [position, setPosition] = useState([0, 0]);
-  const [visible, setVisible] = useState(false);
+  const [position, setPosition] = useState<number[]>([0, 0]);
+  const [visible, setVisible] = useState<boolean>(false);
   const [ymaps, setYmaps] = useState<YMapsApi>();
 
   // эта херня для того чтобы при авторизации на фоне у юзера был его город :)
@@ -31,6 +32,11 @@ const AuthContainer: React.FC = () => {
     getCityCoords();
   }, [ymaps]);
 
+  const createAccount = () => {
+    firebase.auth().createUserWithEmailAndPassword('somerom71@gmail.com', 'So')
+      .catch((error) => console.log(error.message));
+  };
+
   return (
     <div className={s.wrap}>
       <YMaps
@@ -43,6 +49,12 @@ const AuthContainer: React.FC = () => {
           state={{ center: position, zoom: 12 }}
         />
       </YMaps>
+      <div>
+        <h2>Registration</h2>
+        <input type="text" placeholder="Email" />
+        <input type="password" placeholder="Password" />
+        <button onClick={() => createAccount()}>Continue</button>
+      </div>
     </div>
   );
 };

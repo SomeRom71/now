@@ -30,10 +30,13 @@
   },
   "dependencies": {
     "classnames": "2.2.6",
+    "firebase": "8.0.1",
     "next": "9.5.5",
     "react": "16.14.0",
     "react-dom": "16.14.0",
+    "react-redux": "7.2.2",
     "react-yandex-maps": "4.4.0",
+    "redux": "4.0.5",
     "sass": "1.28.0",
     "ymaps": "0.2.1"
   },
