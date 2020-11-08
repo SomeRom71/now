@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { YMaps, Map, YMapsApi } from 'react-yandex-maps';
 import cn from 'classnames';
-import firebase from 'firebase';
+import { useDispatch } from 'react-redux';
 import { YMAPS_API_KEY } from '../../constants/api-constants';
+import ModalActions from '../../actions/modal-actions';
 import s from './auth.module.scss';
 
 const AuthContainer: React.FC = () => {
+
+  const dispatch = useDispatch();
+
   const [position, setPosition] = useState<number[]>([0, 0]);
   const [visible, setVisible] = useState<boolean>(false);
   const [ymaps, setYmaps] = useState<YMapsApi>();
@@ -30,12 +34,8 @@ const AuthContainer: React.FC = () => {
 
   useEffect(() => {
     getCityCoords();
+    dispatch(ModalActions.openModal('auth-modal'));
   }, [ymaps]);
-
-  const createAccount = () => {
-    firebase.auth().createUserWithEmailAndPassword('somerom71@gmail.com', 'So')
-      .catch((error) => console.log(error.message));
-  };
 
   return (
     <div className={s.wrap}>
@@ -49,12 +49,6 @@ const AuthContainer: React.FC = () => {
           state={{ center: position, zoom: 12 }}
         />
       </YMaps>
-      <div>
-        <h2>Registration</h2>
-        <input type="text" placeholder="Email" />
-        <input type="password" placeholder="Password" />
-        <button onClick={() => createAccount()}>Continue</button>
-      </div>
     </div>
   );
 };

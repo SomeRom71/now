@@ -7,6 +7,7 @@ import { store } from '../store';
 import { FIREBASE_CONFIG } from '../constants/api-constants';
 import Header from '../containers/layouts/header';
 import GlobalWrap from '../components/global-wrap';
+import Modals from '../components/modals';
 import '../assets/main.scss';
 
 if (!firebase.apps.length) {
@@ -14,6 +15,7 @@ if (!firebase.apps.length) {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
+  console.log(store);
   return (
     <Provider store={store}>
       <Head>
@@ -23,6 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GlobalWrap>
         <Header />
         <Component {...pageProps} />
+        <Modals />
       </GlobalWrap>
     </Provider>
   );
