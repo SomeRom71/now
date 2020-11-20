@@ -1,9 +1,15 @@
 import React from 'react';
+import cn from 'classnames';
 import styles from './modal.module.scss';
 
-const Modal = ({ children }: any) => (
+interface Imodal {
+  children: React.ReactNode,
+  size: 's' | 'm' | 'l',
+}
+
+const Modal = ({ children, size }: Imodal) => (
   <div className={styles.wrap}>
-    <div className={styles.content}>
+    <div className={cn(styles.content, styles[`size-${size}`])}>
       {children}
     </div>
   </div>

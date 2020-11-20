@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import { reducer as modal } from 'redux-modal';
-import globalReducer from './global-reducer';
+import positionReducer from './position-reducer';
 
 export const rootReducer = combineReducers({
   modal,
-  global: globalReducer,
+  position: positionReducer,
 });

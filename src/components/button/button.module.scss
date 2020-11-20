@@ -1,0 +1,27 @@
+@import '../../assets/helpers/variables.scss';
+
+.button{
+  background: #D97474;
+  border-radius: 80px;
+  height: 44px;
+  color: $white;
+  width: 100%;
+  max-width: 195px;
+  transition: opacity .3s ease;
+  &:disabled {
+    opacity: .7;
+  }
+}
+
+.text {
+  color: $light-blue;
+}
+
+.main {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

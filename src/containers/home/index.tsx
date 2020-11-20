@@ -1,6 +1,8 @@
 import React from 'react';
-import s from './home.module.scss';
+import MapContainer from '../../components/map';
 
-const HomeContainer: React.FC = () => <div className={s.container}>Home</div>;
+const HomeContainer: React.FC = () => (
+  <MapContainer />
+);
 
 export default HomeContainer;

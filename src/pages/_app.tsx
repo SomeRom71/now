@@ -15,7 +15,6 @@ if (!firebase.apps.length) {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
-  console.log(store);
   return (
     <Provider store={store}>
       <Head>

@@ -6240,6 +6240,11 @@ react-dom@16.14.0:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
+react-hook-form@6.11.0:
+  version "6.11.0"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-6.11.0.tgz#db041861414799e002ea482e54da6f9bc452f1b0"
+  integrity sha512-YoiNCKSfrLv0CCK9fiVorNt1YM5xOV4Fo+O3e3CphS6N4xrXah3rJo1YIA34qSbIJwXgcsS2WOIb2K/Wb6e56A==
+
 react-is@16.13.1, react-is@^16.13.1, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -6467,6 +6472,11 @@ regjsparser@^0.6.4:
   integrity sha512-64O87/dPDgfk8/RQqC4gkZoGyyWFIEUTTh80CU6CWuK5vkCGyekIx+oKcEIYtP/RAxSQltCZHCNu/mdd7fqlJw==
   dependencies:
     jsesc "~0.5.0"
+
+remote-script-loader@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/remote-script-loader/-/remote-script-loader-1.0.3.tgz#21da41923186869a72a32b35f5bd6ccc3d105686"
+  integrity sha512-Ugw/rD3Tz3YlEFp/qxYz0qLxX0BAf3NtuQct31jyv8u9qdC+AB7J68n9R96lnPETQ5obY6pT6GEE2IGowiIkTw==
 
 remove-trailing-separator@^1.0.1:
   version "1.1.0"
@@ -7782,6 +7792,13 @@ yargs@^15.1.0, yargs@^15.3.1:
     which-module "^2.0.0"
     y18n "^4.0.0"
     yargs-parser "^18.1.2"
+
+ymaps-loader@1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/ymaps-loader/-/ymaps-loader-1.0.6.tgz#9538ee4da355658dc7f25cef856cf0785aa60a0f"
+  integrity sha512-7cBo3KkGJ55Nb3Gnlfbx8fDi+OF5qQzPEIXBioLWn8URug7DRVDjNROHzPcKFk2K5BONi43HXaPZmc0Q+Z6ZNw==
+  dependencies:
+    remote-script-loader "^1.0.3"
 
 ymaps@0.2.1:
   version "0.2.1"

@@ -1,55 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { YMaps, Map, YMapsApi } from 'react-yandex-maps';
-import cn from 'classnames';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { YMAPS_API_KEY } from '../../constants/api-constants';
+import { useRouter } from 'next/router';
+import firebase from 'firebase';
+import { REGISTRATION_MODAL } from '../../constants/modal-constants';
+import { INDEX_PATH } from '../../constants/router-constants';
 import ModalActions from '../../actions/modal-actions';
-import s from './auth.module.scss';
 
 const AuthContainer: React.FC = () => {
 
   const dispatch = useDispatch();
+  const router = useRouter();
 
-  const [position, setPosition] = useState<number[]>([0, 0]);
-  const [visible, setVisible] = useState<boolean>(false);
-  const [ymaps, setYmaps] = useState<YMapsApi>();
-
-  // эта херня для того чтобы при авторизации на фоне у юзера был его город :)
-  const getCityCoords = async () => {
-    if (!ymaps) {
-      return;
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      router.push(INDEX_PATH);
+    } else {
+      dispatch(ModalActions.openModal(REGISTRATION_MODAL));
     }
-    // берем примерные координаты и узнаем из какого города юзер
-    const geolocation = await ymaps.geolocation.get({ provider: 'auto' });
-    const coords = await geolocation.geoObjects.get(0).geometry.getCoordinates();
-    const geocode = await ymaps.geocode(coords, { results: 1 });
-    const location = await geocode.geoObjects.get(0);
-    // известно имя города, берем координаты его центра и выводим чтобы смотрелось ровно
-    const cityName = await location.getLocalities();
-    const cityGeocode = await ymaps.geocode(...cityName);
-    const cityCoordinates = await cityGeocode.geoObjects.get(0).geometry.getCoordinates();
-    setPosition(cityCoordinates);
-    setVisible(true);
-  };
-
-  useEffect(() => {
-    getCityCoords();
-    dispatch(ModalActions.openModal('auth-modal'));
-  }, [ymaps]);
+  });
 
   return (
-    <div className={s.wrap}>
-      <YMaps
-        query={{ apikey: YMAPS_API_KEY }}
-      >
-        <Map
-          onLoad={(ymapsApi) => setYmaps(ymapsApi)}
-          modules={['geocode', 'geolocation']}
-          className={cn(s.map, { [s.visible]: visible })}
-          state={{ center: position, zoom: 12 }}
-        />
-      </YMaps>
-    </div>
+    <div>asd</div>
   );
 };
 

@@ -1,8 +1,12 @@
 import React from 'react';
-import AuthModal from './auth-modal';
+import RegistrationModal from './registration-modal';
+import LoginModal from './login-modal';
 
 const Modals = () => (
-  <AuthModal />
+  <>
+    <RegistrationModal />
+    <LoginModal />
+  </>
 );
 
 export default Modals;
