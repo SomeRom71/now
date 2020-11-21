@@ -7,7 +7,7 @@ import styles from './map.module.scss';
 
 const MapContainer = () => {
 
-  const cityCoords = useSelector((state) => state.position.cityCoords);
+  const cityCoords = useSelector((state: any) => state.position.coords);
 
   return (
     <div className={styles.wrap}>
@@ -19,7 +19,7 @@ const MapContainer = () => {
             <Map
               modules={['geocode', 'geolocation']}
               className={cn(styles.map, styles.visible)}
-              state={{ center: cityCoords, zoom: 12 }}
+              state={{ center: cityCoords, zoom: 15 }}
             />
           </YMaps>
         )}

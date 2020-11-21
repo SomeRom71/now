@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+// @ts-ignore
 import load from 'ymaps-loader';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
