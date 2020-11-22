@@ -1,3 +1,4 @@
+import { Dispatch } from 'react';
 import { show, hide } from 'redux-modal';
 
 class ModalActions {
@@ -8,8 +9,8 @@ class ModalActions {
    * @param {Object} params
    * @returns {Function}
    */
-  openModal(modal, params = {}) {
-    return (dispatch) => {
+  openModal(modal: string, params = {}) {
+    return (dispatch: Dispatch<object>) => {
       dispatch(show(modal, params));
     };
   }
@@ -19,8 +20,8 @@ class ModalActions {
    * @param {String} modal
    * @returns {Function}
    */
-  closeModal(modal) {
-    return (dispatch) => {
+  closeModal(modal:string) {
+    return (dispatch: Dispatch<object>) => {
       dispatch(hide(modal));
     };
   }

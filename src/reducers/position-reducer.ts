@@ -1,3 +1,4 @@
+import { AnyAction } from 'redux';
 import {
   CHANGE_POSITION_STATE,
 } from '../constants/actions-constants';
@@ -9,7 +10,7 @@ const initialState = {
   cityCoords: [],
 };
 
-export default function positionReducer(state = initialState, action) {
+export default function positionReducer(state = initialState, action: AnyAction) {
   switch (action.type) {
     case CHANGE_POSITION_STATE:
       return {
