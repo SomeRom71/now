@@ -3,6 +3,13 @@ import {
   CHANGE_POSITION_STATE,
 } from '../constants/actions-constants';
 
+export interface IPositionData {
+  coords: number[],
+  cityName: string,
+  countryCode: string,
+  cityCoords: number[],
+}
+
 const initialState = {
   coords: [],
   cityName: '',
