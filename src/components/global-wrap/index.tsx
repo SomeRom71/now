@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 // @ts-ignore
 import load from 'ymaps-loader';
 import { useRouter } from 'next/router';
@@ -15,7 +15,6 @@ type IGlobalWrap = {
 
 const GlobalWrap: React.FC<IGlobalWrap> = ({ children }: IGlobalWrap) => {
 
-  const [pointKey, setPointKey] = useState<string>();
   const db = firebase.database();
   const dispatch = useDispatch();
   const router = useRouter();
@@ -30,29 +29,14 @@ const GlobalWrap: React.FC<IGlobalWrap> = ({ children }: IGlobalWrap) => {
     const cityName = await location.getLocalities(0);
     const cityGeocode = await ymaps.geocode(...cityName);
     const cityCoords = await cityGeocode.geoObjects.get(0).geometry.getCoordinates();
-    const pointRef = db.ref('points').push().key;
+    const pointRef = db.ref('points').push({ coords, id });
     if (pointRef !== null) {
-      setPointKey(pointRef);
-      db.ref('points').child(pointRef).set({
-        coords,
-        id,
-      });
+      pointRef.onDisconnect().remove();
     }
     dispatch(setPosition({
       cityName: cityName[0], coords, cityCoords, countryCode,
     }));
   };
-
-  const removePoint = async () => {
-    const pointRef = db.ref(`points/${ pointKey}`);
-    console.log(pointKey);
-    await pointRef.remove();
-  };
-
-  useEffect(() => {
-    window.addEventListener('beforeunload', removePoint);
-    return () => window.removeEventListener('beforeunload', removePoint);
-  }, [pointKey]);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
