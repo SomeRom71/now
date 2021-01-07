@@ -45,6 +45,7 @@ const MapContainer = () => {
               >
                 {Object.keys(points).map((elem) => (
                   <Placemark
+                    key={points[elem].id}
                     geometry={points[elem].coords}
                     onClick={() => alert(points[elem].id)}
                   />

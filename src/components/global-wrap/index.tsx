@@ -19,6 +19,8 @@ const GlobalWrap: React.FC<IGlobalWrap> = ({ children }: IGlobalWrap) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const updateOnlineStatus = () => (navigator.onLine ? db.goOnline() : db.goOffline());
+
   const getCityCoords = async (id?: string) => {
     const ymaps = await load({ apiKey: YMAPS_API_KEY });
     const geolocation = await ymaps.geolocation.get({ provider: 'auto' });
@@ -29,10 +31,8 @@ const GlobalWrap: React.FC<IGlobalWrap> = ({ children }: IGlobalWrap) => {
     const cityName = await location.getLocalities(0);
     const cityGeocode = await ymaps.geocode(...cityName);
     const cityCoords = await cityGeocode.geoObjects.get(0).geometry.getCoordinates();
-    const pointRef = db.ref('points').push({ coords, id });
-    if (pointRef !== null) {
-      pointRef.onDisconnect().remove();
-    }
+    const pointRef = db.ref('points').push({ id, coords });
+    pointRef.onDisconnect().remove();
     dispatch(setPosition({
       cityName: cityName[0], coords, cityCoords, countryCode,
     }));
@@ -40,13 +40,14 @@ const GlobalWrap: React.FC<IGlobalWrap> = ({ children }: IGlobalWrap) => {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
-      if (!user && router.pathname !== AUTH_PATH) {
-        getCityCoords();
+      if (!user) {
         router.push(AUTH_PATH);
       } else {
         getCityCoords(user?.uid);
       }
     });
+    window.addEventListener('online', updateOnlineStatus);
+    return () => window.addEventListener('online', updateOnlineStatus);
   }, []);
 
   return (
